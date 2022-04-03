@@ -1,0 +1,9 @@
+[versions]
+jvm = "17"
+template = "1.0.0"
+kotlin = "1.6.10"
+helidon = "2.4.2"
+gradle = "7.4.2"
+
+[libraries]
+kotlin = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
