@@ -3,7 +3,11 @@ tasks.wrapper {
     distributionType = Wrapper.DistributionType.ALL
 }
 
+val frontendInputs = rootProject.relativePath("frontend/dist")
+val frontendOutputs = rootProject.relativePath("backend/src/main/resources/static")
+
 val buildFrontend = tasks.register("buildFrontend") {
+    outputs.dir(frontendInputs)
     doLast {
         exec {
             setWorkingDir(rootProject.relativePath("frontend"))
@@ -14,7 +18,9 @@ val buildFrontend = tasks.register("buildFrontend") {
 }
 
 val copyFrontend = tasks.register<Copy>("copyFrontend") {
+    inputs.dir(frontendInputs)
+    outputs.dir(frontendOutputs)
     dependsOn(buildFrontend)
-    from(rootProject.relativePath("frontend/dist"))
-    into(rootProject.relativePath("backend/src/main/resources/static"))
+    from(frontendInputs)
+    into(frontendOutputs)
 }
